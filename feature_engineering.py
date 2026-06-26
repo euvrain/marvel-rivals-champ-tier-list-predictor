@@ -10,11 +10,8 @@ winrate=data['wins']/data['matches']
 
 kda=0
 print(winrate.head())
-for i in range(len(data['d'])):
-    if data['d'][i]==0:
-        kda = data['k']/((data['d'] + 1))
-    else:
-        kda = data['k']/data['d']
+
+kda=data['k']/(data['d']).replace(0,1)
 print(kda.head())
 
 #damage per min
@@ -55,3 +52,6 @@ data['heal_per_match']=data['total_hero_heal']/data['matches']
 
 #damage taken per match
 data['dmg_taken_per_match']=data['total_damage_taken']/data['matches']
+
+#hitrate
+data['hit_rate']=data['session_hit_rate']
