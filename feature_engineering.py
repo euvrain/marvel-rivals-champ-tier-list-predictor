@@ -16,7 +16,6 @@ print(kda.head())
 
 #damage per min
 
-
 split=data['play_time'].str.extract(r'(?P<hours>\d+)h\s*(?P<minutes>\d+)m\s*(?P<seconds>\d+)s')
 split.columns = ['hours', 'minutes', 'seconds']
 print(split)
@@ -30,3 +29,7 @@ split['seconds'] = (split['seconds'].astype(int) >= 31).astype(int)
 split['stm']=split['seconds']
 split['total_minutes']=split['htm']+split['minutes']+split['stm']
 print(split.head())
+
+data["play_time_minutes"]=split['total_minutes']
+data['dmg_per_min'] = data['total_hero_damage']/data['play_time_minutes']
+print(data['dmg_per_min'].head())
