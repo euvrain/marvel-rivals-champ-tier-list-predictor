@@ -33,3 +33,8 @@ print(split.head())
 data["play_time_minutes"]=split['total_minutes']
 data['dmg_per_min'] = data['total_hero_damage']/data['play_time_minutes']
 print(data['dmg_per_min'].head())
+
+
+#healing per min
+data['heal_per_min']=data['total_hero_heal']/data['play_time_minutes']
+print(data['heal_per_min'].head())
