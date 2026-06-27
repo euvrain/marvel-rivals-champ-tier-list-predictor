@@ -4,7 +4,9 @@ import pandas as pd
 data=pd.read_csv("raw_hero_stats.csv")
 
 print(data.head())
-feature_cols=[]
+feature_cols=['hero_name']
+
+
 #kda and winrate
 data['winrate']=data['wins']/data['matches']
 
