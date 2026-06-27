@@ -8,6 +8,9 @@ from sklearn.preprocessing import LabelEncoder
 
 data=pd.read_csv("features.csv")
 
+print(data.shape)
 print(data.head())
+
+
 
 
