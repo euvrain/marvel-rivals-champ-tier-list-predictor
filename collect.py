@@ -33,8 +33,8 @@ for name in hero_names:
         records.append(stats_resp.json())
         print(f"✓ {name}")
     elif stats_resp.status_code == 429:
-        print(f" rate limited on {name}, waiting 60s...")
-        time.sleep(60)
+        print(f" rate limited on {name}, waiting 120s...")
+        time.sleep(120)
         retry = requests.get(f"{BASE_URL}/heroes/hero/{name}/stats", headers=HEADERS)
         if retry.status_code == 200:
             records.append(retry.json())
