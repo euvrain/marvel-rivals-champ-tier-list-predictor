@@ -35,23 +35,28 @@ heroes.to_csv("raw_heros.csv", index=False)
 records = []
 for name in hero_names:
     stats_resp = requests.get(f"{BASE_URL}/heroes/hero/{name}/stats", headers=HEADERS)
+    
     if stats_resp.status_code == 200:
         records.append(stats_resp.json())
         print(f"✓ {name}")
     elif stats_resp.status_code == 429:
-        print(f"rate limited on {name}, waiting 60s...")
-        time.sleep(60)  # wait a full minute
-        # retry once
-        stats_resp = requests.get(f"{BASE_URL}/heroes/hero/{name}/stats", headers=HEADERS)
-        if stats_resp.status_code == 200:
-            records.append(stats_resp.json())
+        print(f"⏳ rate limited on {name}, waiting 60s...")
+        time.sleep(60)
+        retry = requests.get(f"{BASE_URL}/heroes/hero/{name}/stats", headers=HEADERS)
+        if retry.status_code == 200:
+            records.append(retry.json())
             print(f"✓ {name} (retry)")
         else:
-            print(f"✗ {name} failed after retry")
-    else:
-        print(f"✗ {name} — {stats_resp.status_code}")
-    time.sleep(2)  # increase from 0.5s to 2s between each request
-
+            print(f"✗ {name} failed after retry — {retry.status_code}")
+    elif stats_resp.status_code == 400:
+        print(f"✗ {name} — bad name format")
+    elif stats_resp.status_code == 404:
+        print(f"✗ {name} — no stats available yet")
+    elif stats_resp.status_code == 401:
+        print("✗ API key invalid, stopping")
+        break
+    
+    time.sleep(2)
 
 df = pd.DataFrame(records)
 df.to_csv("raw_hero_stats.csv", index=False)
