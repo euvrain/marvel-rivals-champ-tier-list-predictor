@@ -1,7 +1,7 @@
 import pandas as pd
 
 
-data=pd.read_csv("raw_hero_stats.csv")
+data=pd.read_csv("hero_stats.csv")
 
 print(data.head())
 feature_cols=['hero_name']
