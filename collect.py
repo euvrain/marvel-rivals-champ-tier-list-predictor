@@ -52,4 +52,4 @@ for name in hero_names:
     time.sleep(2)
 
 df = pd.DataFrame(records)
-df.to_csv("raw_hero_stats.csv", index=False)
+df.to_csv("hero_stats.csv", index=False)
