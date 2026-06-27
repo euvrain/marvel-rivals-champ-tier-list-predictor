@@ -24,19 +24,9 @@ hero_names=heroes['name']
 heroes.to_csv("raw_heros.csv", index=False)
 
 # Second get stat and match data
-#hero_stats = requests.get(f"{BASE_URL}/heroes/hero/:hero/stats", headers=HEADERS).json()
-# Then loop and collect stats for each
-# records = []
-# for name in hero_names:
-#     stats_resp = requests.get(f"{BASE_URL}/heroes/hero/{name}/stats", headers=HEADERS)
-#     if stats_resp.status_code == 200: #Successful response with hero details
-#         records.append(stats_resp.json())
-
-# df = pd.DataFrame(records)
-# df.to_csv("raw_hero_stats.csv", index=False)
 records = []
 for name in hero_names:
-    encoded_name = urllib.parse.quote(name) 
+    name = urllib.parse.quote(name) 
     stats_resp = requests.get(f"{BASE_URL}/heroes/hero/{name}/stats", headers=HEADERS)
     
     if stats_resp.status_code == 200:
