@@ -33,7 +33,14 @@ cluster_stats = data.groupby('cluster')['winrate'].mean().sort_values(ascending=
 print("\nwinrate by cluster:")
 print(cluster_stats)
 
-tier = {2: 'B', 4: 'C', 0: 'S', 3: 'A', 1: 'D'}
+tier = {
+    2: 'S',
+    4: 'A',
+    0: 'B',
+    3: 'C',
+    1: 'D'
+}
+
 data['tier'] = data['cluster'].map(tier) 
 print(f"\nhero tiers: {data[['hero_name','tier']]}")
 
