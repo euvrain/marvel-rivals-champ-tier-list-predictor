@@ -36,3 +36,5 @@ print(cluster_stats)
 tier = {2: 'B', 4: 'C', 0: 'S', 3: 'A', 1: 'D'}
 data['tier'] = data['cluster'].map(tier) 
 print(f"\nhero tiers: {data[['hero_name','tier']]}")
+
+data[['hero_name', 'tier', 'winrate', 'kda', 'role', 'dps_norm', 'sup_norm', 'tank_norm', 'hit_rate']].to_csv('hero_tiers.csv', index=False)
